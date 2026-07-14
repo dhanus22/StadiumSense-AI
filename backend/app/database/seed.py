@@ -1,37 +1,31 @@
 from app.database.database import SessionLocal
 from app.models.crowd import CrowdStatus
 from app.models.parking import ParkingStatus
+from app.models.food import FoodQueue
 
 db = SessionLocal()
 
-if db.query(CrowdStatus).count() == 0:
-    db.add_all([
-        CrowdStatus(gate_name="Gate A", occupancy=1200, capacity=2000),
-        CrowdStatus(gate_name="Gate B", occupancy=1850, capacity=2000),
-        CrowdStatus(gate_name="Gate C", occupancy=900, capacity=2000),
-        CrowdStatus(gate_name="Gate D", occupancy=450, capacity=2000),
-    ])
-    db.commit()
+try:
+    if db.query(CrowdStatus).count() == 0:
+        db.add_all([
+            CrowdStatus(gate_name="Gate A", occupancy=1200, capacity=2000),
+            CrowdStatus(gate_name="Gate B", occupancy=1850, capacity=2000),
+        ])
 
-if db.query(ParkingStatus).count() == 0:
-    db.add_all([
-        ParkingStatus(
-            lot_name="Lot A",
-            occupied=320,
-            capacity=500
-        ),
-        ParkingStatus(
-            lot_name="Lot B",
-            occupied=470,
-            capacity=500
-        ),
-        ParkingStatus(
-            lot_name="Lot C",
-            occupied=180,
-            capacity=500
-        ),
-    ])
-    db.commit()
+    if db.query(ParkingStatus).count() == 0:
+        db.add_all([
+            ParkingStatus(lot_name="Lot A", occupied=320, capacity=500),
+            ParkingStatus(lot_name="Lot B", occupied=470, capacity=500),
+        ])
+
+    if db.query(FoodQueue).count() == 0:
+        db.add_all([
+            FoodQueue(food_court="North Court", queue_length=45, average_wait=12),
+            FoodQueue(food_court="South Court", queue_length=18, average_wait=5),
+        ])
+        db.commit()
+finally:
+    db.close()
 
 print("Sample crowd data inserted!")
 
