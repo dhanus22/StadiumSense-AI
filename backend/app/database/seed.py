@@ -2,6 +2,7 @@ from app.database.database import SessionLocal
 from app.models.crowd import CrowdStatus
 from app.models.parking import ParkingStatus
 from app.models.food import FoodQueue
+from app.models.weather import WeatherStatus
 
 db = SessionLocal()
 
@@ -22,6 +23,15 @@ try:
         db.add_all([
             FoodQueue(food_court="North Court", queue_length=45, average_wait=12),
             FoodQueue(food_court="South Court", queue_length=18, average_wait=5),
+        ])
+    if db.query(WeatherStatus).count() == 0:
+        db.add_all([
+        WeatherStatus(
+            condition="Sunny",
+            temperature=31,
+            humidity=62,
+            wind_speed=12
+            )
         ])
         db.commit()
 finally:
