@@ -1,4 +1,5 @@
 from fastapi import APIRouter
+from app.api.crowd import router as crowd_router
 
 router = APIRouter()
 
@@ -9,3 +10,6 @@ def health_check():
         "status": "healthy",
         "message": "StadiumSense AI Backend is running"
     }
+
+
+router.include_router(crowd_router)
