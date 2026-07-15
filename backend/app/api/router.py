@@ -5,6 +5,7 @@ from app.api.parking import router as parking_router
 from app.api.food import router as food_router
 from app.api.weather import router as weather_router
 from app.api.dashboard import router as dashboard_router
+from app.api.volunteer import router as volunteer_router
 
 router = APIRouter()
 
@@ -23,3 +24,4 @@ router.include_router(parking_router)
 router.include_router(food_router)
 router.include_router(weather_router)
 router.include_router(dashboard_router)
+router.include_router(volunteer_router)

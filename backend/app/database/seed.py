@@ -3,6 +3,7 @@ from app.models.crowd import CrowdStatus
 from app.models.parking import ParkingStatus
 from app.models.food import FoodQueue
 from app.models.weather import WeatherStatus
+from app.models.volunteer import Volunteer
 
 db = SessionLocal()
 
@@ -33,7 +34,32 @@ try:
             wind_speed=12
             )
         ])
+    if db.query(Volunteer).count() == 0:
+        db.add_all([
+            Volunteer(
+                name="John",
+                location="Gate A",
+                status="Active",
+                assigned_task="Crowd Guidance",
+                available=True
+            ),
+            Volunteer(
+                name="Sarah",
+                location="Food Court",
+                status="Busy",
+                assigned_task="Queue Management",
+                available=False
+            ),
+            Volunteer(
+                name="Mike",
+                location="Parking Lot B",
+                status="Active",
+                assigned_task="Parking Assistance",
+                available=True
+            ),
+        ])
         db.commit()
+
 finally:
     db.close()
 
