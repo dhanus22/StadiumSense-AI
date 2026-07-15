@@ -5,6 +5,7 @@ from app.services.parking_service import get_all_parking
 from app.services.food_service import get_all_food
 from app.services.weather_service import get_weather
 from app.services.volunteer_service import get_all_volunteers
+from app.services.alert_service import get_all_alerts
 
 
 def get_dashboard_data(db: Session):
@@ -14,4 +15,5 @@ def get_dashboard_data(db: Session):
         "food": get_all_food(db),
         "weather": get_weather(db),
         "volunteers": get_all_volunteers(db),
+        "alerts": get_all_alerts(db),
     }

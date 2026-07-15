@@ -5,3 +5,4 @@ from app.models.parking import ParkingStatus
 from app.models.food import FoodQueue
 from app.models.weather import WeatherStatus
 from app.models.volunteer import Volunteer
+from app.models.alert import Alert

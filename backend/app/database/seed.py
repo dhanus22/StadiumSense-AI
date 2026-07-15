@@ -4,6 +4,7 @@ from app.models.parking import ParkingStatus
 from app.models.food import FoodQueue
 from app.models.weather import WeatherStatus
 from app.models.volunteer import Volunteer
+from app.models.alert import Alert
 
 db = SessionLocal()
 
@@ -56,6 +57,27 @@ try:
                 status="Active",
                 assigned_task="Parking Assistance",
                 available=True
+            ),
+        ])
+    if db.query(Alert).count() == 0:
+        db.add_all([
+            Alert(
+                alert_type="Medical",
+                location="Gate B",
+                severity="High",
+                description="A spectator requires immediate medical attention."
+            ),
+            Alert(
+                alert_type="Crowd",
+                location="Gate A",
+                severity="Medium",
+                description="Crowd density is increasing near the entrance."
+            ),
+            Alert(
+                alert_type="Weather",
+                location="Main Stadium",
+                severity="Low",
+                description="Light rain expected in the next 20 minutes."
             ),
         ])
         db.commit()
