@@ -5,7 +5,7 @@ from app.database.database import get_db
 from app.services.dashboard_service import get_dashboard_data
 from app.utils.dashboard_serializer import serialize_dashboard
 from app.services.prompt_builder import build_summary_prompt, build_chat_prompt
-from app.services.ai_service import generate_summary, generate_chat_response
+from app.services.ai_service import generate_content
 from app.schemas.ai import ChatRequest
 
 
@@ -22,7 +22,7 @@ def ai_summary(db: Session = Depends(get_db)):
 
     prompt = build_summary_prompt(serialized)
 
-    summary = generate_summary(prompt)
+    summary = summary = generate_content(prompt)
 
     return {
         "summary": summary
@@ -38,7 +38,7 @@ def ai_chat(request: ChatRequest, db: Session = Depends(get_db)):
         serialized
     )
 
-    response = generate_chat_response(prompt)
+    response = generate_content(prompt)
 
     return {
         "response": response
