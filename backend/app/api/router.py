@@ -7,6 +7,7 @@ from app.api.weather import router as weather_router
 from app.api.dashboard import router as dashboard_router
 from app.api.volunteer import router as volunteer_router
 from app.api.alert import router as alert_router
+from app.api.ai import router as ai_router
 
 router = APIRouter()
 
@@ -27,3 +28,4 @@ router.include_router(weather_router)
 router.include_router(dashboard_router)
 router.include_router(volunteer_router)
 router.include_router(alert_router)
+router.include_router(ai_router)

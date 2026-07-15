@@ -80,11 +80,13 @@ try:
                 description="Light rain expected in the next 20 minutes."
             ),
         ])
-        db.commit()
+    db.commit()
+    print("Sample data seeded successfully.")
+
+except Exception as e:
+    db.rollback()
+    print(f"Error seeding database: {e}")
 
 finally:
     db.close()
 
-print("Sample crowd data inserted!")
-
-db.close()
