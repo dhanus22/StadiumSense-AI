@@ -15,8 +15,10 @@ router = APIRouter()
 @router.get("/health")
 def health_check():
     return {
+        "success": True,
         "status": "healthy",
-        "message": "StadiumSense AI Backend is running"
+        "application": "StadiumSense AI",
+        "version": "1.0.0"
     }
 
 
