@@ -2,6 +2,12 @@ from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, declarative_base
 
 from app.core.config import settings
+import os
+
+# print("Working Directory =", os.getcwd())
+# print("DATABASE_URL =", settings.DATABASE_URL)
+# print("Data folder exists:", os.path.exists("./data"))
+# print("DB exists:", os.path.exists("./data/stadiumsense.db"))
 
 engine = create_engine(
     settings.DATABASE_URL,
